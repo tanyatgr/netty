@@ -1,23 +1,24 @@
 package hamster_server;
 
-import io.netty.channel.ChannelHandler;
-import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
+import io.netty.channel.socket.SocketChannel;
+import io.netty.handler.codec.http.HttpRequestDecoder;
+import io.netty.handler.codec.http.HttpResponseEncoder;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 
-public class ServerInitializer implements ChannelHandler {
+public class ServerInitializer extends ChannelInitializer<SocketChannel> {
 
-	public void exceptionCaught(ChannelHandlerContext arg0, Throwable arg1) throws Exception {
-		// TODO Auto-generated method stub
-
+	@Override
+	protected void initChannel(SocketChannel ch) throws Exception {
+		ChannelPipeline p = ch.pipeline();
+		p.addLast(new LoggingHandler(LogLevel.INFO));
+		p.addLast("decoder", new HttpRequestDecoder());
+		p.addLast("encoder", new HttpResponseEncoder());
+		p.addLast("handler", new ServerHandler());
+		
 	}
 
-	public void handlerAdded(ChannelHandlerContext arg0) throws Exception {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void handlerRemoved(ChannelHandlerContext arg0) throws Exception {
-		// TODO Auto-generated method stub
-
-	}
 
 }
