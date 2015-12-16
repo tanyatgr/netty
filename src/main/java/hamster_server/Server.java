@@ -24,13 +24,19 @@ public class Server {
 			.childHandler(new ServerInitializer());
 			
 			Channel ch = b.bind(SERVER_PORT).sync().channel();
+			ch.closeFuture().sync();
 		}finally{
 			bossGroup.shutdownGracefully();
 			workerGroup.shutdownGracefully();
 		}
 	}
 
-	public static void main(String[] args) throws Exception {
-		new Server().start();
+	public static void main(String[] args){
+		try {
+			new Server().start();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

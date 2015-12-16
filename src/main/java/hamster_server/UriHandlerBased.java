@@ -9,4 +9,10 @@ public class UriHandlerBased {
 		
 	}
 
+
+	public String getContentType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
