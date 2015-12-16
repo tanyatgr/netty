@@ -2,17 +2,13 @@ package hamster_server;
 
 import io.netty.handler.codec.http.HttpRequest;
 
-public class UriHandlerBased {
+public abstract class UriHandlerBased {
 
-	public void process(HttpRequest request) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public abstract void process(HttpRequest request, StringBuilder buf);
 
 	public String getContentType() {
-		// TODO Auto-generated method stub
-		return null;
+		return "text/plain; charset=UTF-8";
 	}
 
+	
 }
