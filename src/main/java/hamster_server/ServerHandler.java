@@ -31,6 +31,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 	public ServerHandler() {
 		if (handlers.size() == 0) {
 			handlers.put("/hello", new HelloServerHandler());
+			handlers.put("/redirect", new RedirectServerHandler());
 		}
 	}
 
@@ -54,8 +55,9 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 			System.out.println(context);
 			handler = handlers.get(context);
 			if (handler != null) {
-				handler.process(request,buf);
+				handler.process(ctx,request,buf);
 			}
+			
 		}
 
 		if (msg instanceof LastHttpContent) {
