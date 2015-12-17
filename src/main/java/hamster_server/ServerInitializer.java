@@ -9,7 +9,8 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
 public class ServerInitializer extends ChannelInitializer<SocketChannel> {
-
+    public static StatisticParameters params = StatisticParameters.getInstance(); 
+	
 	@Override
 	protected void initChannel(SocketChannel ch) throws Exception {
 		ChannelPipeline p = ch.pipeline();
